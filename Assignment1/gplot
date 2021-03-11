@@ -1,0 +1,3 @@
+set terminal png
+set output "CDF_Plot.png"
+plot "final_data" using 1:2 with lp

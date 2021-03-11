@@ -1,0 +1,24 @@
+PING www.google.com (172.217.165.132) 56(84) bytes of data.
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=1 ttl=118 time=4.79 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=2 ttl=118 time=6.94 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=3 ttl=118 time=6.00 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=4 ttl=118 time=5.93 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=5 ttl=118 time=8.47 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=6 ttl=118 time=7.44 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=7 ttl=118 time=4.72 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=8 ttl=118 time=6.65 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=9 ttl=118 time=5.62 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=10 ttl=118 time=8.48 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=11 ttl=118 time=5.69 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=12 ttl=118 time=9.12 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=13 ttl=118 time=5.96 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=14 ttl=118 time=5.33 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=15 ttl=118 time=4.95 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=16 ttl=118 time=5.47 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=17 ttl=118 time=7.55 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=18 ttl=118 time=5.48 ms
+64 bytes from lga25s70-in-f4.1e100.net (172.217.165.132): icmp_seq=19 ttl=118 time=7.77 ms
+
+--- mecca.coffee ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4001ms
+rtt min/avg/max/mdev = 55.158/58.986/68.352/4.755 ms
