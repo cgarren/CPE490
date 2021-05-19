@@ -1,49 +1,57 @@
 package main
 
+//import necessary packages
 import (
-        "bufio"
-        "fmt"
-        "net"
-        "os"
-        "strings"
-        "time"
+	"bufio"   //get user input
+	"fmt"     // standard i/o
+	"net"     // send and receive
+	"os"      // access arguments
+	"strings" // string manupulation methods
 )
 
 func main() {
-        arguments := os.Args
-        if len(arguments) == 1 {
-                fmt.Println("Please provide port number")
+	// checks to make sure that the user povided a port to listen on
+        if len(os.Args) == 1 {
+                fmt.Println("Please provide a valid port number")
                 return
         }
 
-        PORT := ":" + arguments[1]
-        l, err := net.Listen("tcp", PORT)
-        if err != nil {
-                fmt.Println(err)
-                return
-        }
-        defer l.Close()
-
-        c, err := l.Accept()
+        // estabilishes a tcp connection listener on the specified port and catches any errors
+        listener, err := net.Listen("tcp", ":" + os.Args[1])
         if err != nil {
                 fmt.Println(err)
                 return
         }
 
+        // when the function returns (due to a client's closed connection or otherwise), stop listening
+        defer listener.Close()
+
+        // start accepting new connections to the server and check for errors
+        connection, err := listener.Accept()
+        if err != nil {
+                fmt.Println(err)
+                return
+        }
+
+        // main infinite loop to handle data transfer
         for {
-                netData, err := bufio.NewReader(c).ReadString('\n')
+                // receive data from the connection and check for errors
+                data, err := bufio.NewReader(connection).ReadString('\n')
                 if err != nil {
                         fmt.Println(err)
                         return
                 }
-                if strings.TrimSpace(string(netData)) == "STOP" {
-                        fmt.Println("Exiting TCP server!")
+
+                // check for exit message to stop the script
+                if strings.TrimSpace(string(data)) == "exit" || strings.TrimSpace(string(data)) == "quit" {
+                        fmt.Println("Bye!")
                         return
                 }
 
-                fmt.Print("-> ", string(netData))
-                t := time.Now()
-                myTime := t.Format(time.RFC3339) + "\n"
-                c.Write([]byte(myTime))
+                // print out client's message
+                fmt.Print("Client: ", string(data))
+
+                // repeat client's message back to them
+                connection.Write([]byte(data))
         }
 }

@@ -1,37 +1,45 @@
 package main
 
+//import necessary packages
 import (
-        "bufio"
-        "fmt"
-        "net"
-        "os"
-        "strings"
+	"bufio"   //get user input
+	"fmt"     // standard i/o
+	"net"     // send and receive
+	"os"      // access arguments
+	"strings" // string manupulation methods
 )
 
 func main() {
-        arguments := os.Args
-        if len(arguments) == 1 {
-                fmt.Println("Please provide host:port.")
+	// checks to make sure that the user povided a server to connect to
+        if len(os.Args) == 1 {
+                fmt.Println("Please provide a valid host and port as two separate arguments")
+                return
+        }
+	
+	// estabilishes a tcp connection to the specified server and catches any errors
+        connection, error := net.Dial("tcp", os.Args[1] + ":" + os.Args[2])
+        if error != nil {
+                fmt.Println(error)
                 return
         }
 
-        CONNECT := arguments[1]
-        c, err := net.Dial("tcp", CONNECT)
-        if err != nil {
-                fmt.Println(err)
-                return
-        }
-
+	// main infinite loop to handle data transfer
         for {
+		// use bufio to get user input properly buffered
                 reader := bufio.NewReader(os.Stdin)
                 fmt.Print(">> ")
-                text, _ := reader.ReadString('\n')
-                fmt.Fprintf(c, text+"\n")
+                data, _ := reader.ReadString('\n')
 
-                message, _ := bufio.NewReader(c).ReadString('\n')
-                fmt.Print("->: " + message)
-                if strings.TrimSpace(string(text)) == "STOP" {
-                        fmt.Println("TCP client exiting...")
+                // send data to the connection using standard input/output methods
+                fmt.Fprintf(connection, data+"\n")
+
+                // receive data from the connection and print it out
+                message, _ := bufio.NewReader(connection).ReadString('\n')
+                fmt.Print("Server: " + message)
+
+                // check for exit message to stop the script
+                if strings.TrimSpace(string(data)) == "exit" || strings.TrimSpace(string(data)) == "quit" {
+                        fmt.Println("Bye!")
                         return
                 }
         }
